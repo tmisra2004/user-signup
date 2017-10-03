@@ -10,56 +10,7 @@ email = ""
 
 @app.route("/")
 def index():
-    content = """
-    <!DOCTYPE html>
-
-<html>
-    <head>
-        <style>
-            .error {
-                color: red;
-            }
-        </style>
-    </head>
-    <body>
-    <h1>Signup</h1>
-        <form action="signup" method="post">
-            <table>
-                <tr>
-                    <td><label for="username">Username</label></td>
-                    <td>
-                        <input name="username" type="text" value="">
-                        <span class="error"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="password">Password</label></td>
-                    <td>
-                        <input name="password" type="password">
-                        <span class="error"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="verify">Verify Password</label></td>
-                    <td>
-                        <input name="verify" type="password">
-                        <span class="error"></span>
-                    </td>
-                </tr>
-                <tr>
-                    <td><label for="email">Email (optional)</label></td>
-                    <td>
-                        <input name="email" value="">
-                        <span class="error"></span>
-                    </td>
-                </tr>
-            </table>
-            <input type="submit">
-        </form>
-    </body>
-</html>
-"""
-    return content
+    return render_template("index.html")
 
 @app.route("/signup", methods=['POST'])
 def user_signup():
@@ -69,19 +20,19 @@ def user_signup():
     email = request.form['email']
     
     if username == "":
-        error = "'{0}'Please enter a username.".format(username)
+        error = "Please enter a username."
         return error
 
     if password == "":
-        error = "'{0}'Please enter a password.".format(password)
+        error = "Please enter a password."
         return error
 
     if len(username) < 3 or len(username) > 20:
-        error = "'{0}'Username must be at least 3 characters but not more than 20 characters.".format(username)
+        error = "Username must be at least 3 characters but not more than 20 characters."
         return error
 
     if password != verify:
-        error = "'{0}'Passwords do not match.".format(password)
+        error = "Passwords do not match."
         return error
     
     num_ats = 0
