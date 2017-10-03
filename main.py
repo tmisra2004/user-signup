@@ -23,7 +23,7 @@ def index():
     </head>
     <body>
     <h1>Signup</h1>
-        <form method="post">
+        <form action="signup" method="post">
             <table>
                 <tr>
                     <td><label for="username">Username</label></td>
@@ -61,14 +61,22 @@ def index():
 """
     return content
 
-@app.route("/", methods=['POST'])
+@app.route("/signup", methods=['POST'])
 def user_signup():
     username = request.form['username']
+    password = request.form['password']
+    verify = request.form['verify']
+    email = request.form['email']
+    
     if username == "":
         error = "'{0}'Please enter a username.".format(username)
         return error
 
-    if username.length < 3 or username.length > 20:
+    if password == "":
+        error = "'{0}'Please enter a password.".format(password)
+        return error
+
+    if len(username) < 3 or len(username) > 20:
         error = "'{0}'Username must be at least 3 characters but not more than 20 characters.".format(username)
         return error
 
@@ -110,10 +118,11 @@ def user_signup():
             error = "'{0}'E-mail address must not contain spaces.".format(email)
             return error
 
-        if email.length < 3 or email.length > 20:
+    if len(email) < 3 or len(email) > 20:
             error= "'{0}'E-mail address must be between 3 and 20 characters in length.".format(email)
+            return error
 
-        else:
+    else:
             return render_template("success.html")
 
 app.run()
