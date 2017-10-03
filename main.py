@@ -102,7 +102,7 @@ def user_signup():
             error = "'{0}'E-mail address must contain at least one . symbol.".format(email)
             return error
         
-        if num dots > 1:
+        if num_dots > 1:
             error = "'{0}'E-mail address must contain no more than one . symbol.".format(email)
             return error
 
