@@ -84,10 +84,10 @@ def user_signup():
         if char == "@":
             num_ats+=1
         
-        if char ==".":
+        if char == ".":
             num_dots+=1
 
-        if char = " ":
+        if char = =" ":
             num_spaces+=1
         
         if num_ats < 1:
