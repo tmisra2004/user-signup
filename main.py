@@ -90,13 +90,13 @@ def user_signup():
 
     for char in email:
         if char == "@":
-            num_ats+=1
+            num_ats += 1
         
         if char == ".":
-            num_dots+=1
+            num_dots += 1
 
         if char == " ":
-            num_spaces+=1
+            num_spaces += 1
         
         if num_ats < 1:
             error = "'{0}'E-mail address must contain at least one @ symbol.".format(email)
