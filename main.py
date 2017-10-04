@@ -43,6 +43,6 @@ def user_signup():
         return error
     
     else:
-        return render_template("success.html")
+        return render_template("success.html", username = username)
 
 app.run()
