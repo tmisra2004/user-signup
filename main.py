@@ -38,6 +38,9 @@ def user_signup():
     if len(password) < 3 or len(password) > 20:
         password_error = "Password must be at least 3 characters but no more than 20 characters long."
 
+    if " " in username:
+        username_error = "Username cannot contain spaces."
+
     if " " in password:
         password_error = "Password cannot contain spaces."
     
