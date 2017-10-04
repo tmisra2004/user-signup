@@ -1,4 +1,5 @@
 from flask import Flask, request, redirect, render_template
+import re
 
 app = Flask(__name__)
 app.config['DEBUG'] = True
@@ -34,46 +35,14 @@ def user_signup():
     if password != verify:
         error = "Passwords do not match."
         return error
+
+    test = re.match('^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$', email)
+
+    if test == None:
+        error = "Please enter a valid email address."
+        return error
     
-    num_ats = 0
-    num_dots = 0
-    num_spaces = 0
-
-    for char in email:
-        if char == "@":
-            num_ats += 1
-        
-        if char == ".":
-            num_dots += 1
-
-        if char == " ":
-            num_spaces += 1
-        
-        if num_ats < 1:
-            error = "'{0}'E-mail address must contain at least one @ symbol.".format(email)
-            return error
-        
-        if num_ats > 1:
-            error = "'{0}'E-mail address must contain no more than one @ symbol.".format(email)
-            return error
-
-        if num_dots < 1:
-            error = "'{0}'E-mail address must contain at least one . symbol.".format(email)
-            return error
-        
-        if num_dots > 1:
-            error = "'{0}'E-mail address must contain no more than one . symbol.".format(email)
-            return error
-
-        if num_spaces > 1:
-            error = "'{0}'E-mail address must not contain spaces.".format(email)
-            return error
-
-    if len(email) < 3 or len(email) > 20:
-            error= "'{0}'E-mail address must be between 3 and 20 characters in length.".format(email)
-            return error
-
     else:
-            return render_template("success.html")
+        return render_template("success.html")
 
 app.run()
