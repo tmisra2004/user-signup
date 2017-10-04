@@ -57,6 +57,7 @@ def user_signup():
     else:
         return render_template(
             "index.html",
+            username = username,
             username_error = username_error,
             password_error = password_error,
             verify_error = verify_error,
