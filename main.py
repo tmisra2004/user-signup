@@ -28,14 +28,14 @@ def user_signup():
     if username == "":
         username_error = "Please enter a username."
     
-    if len(username) <= 3 or len(username) > 20:
+    if (len(username) > 0 and len(username) <= 3) or len(username) > 20:
         username_error = "Username must be at least 3 characters but not more than 20 characters."
         
-
     if password == "":
         password_error = "Please enter a password."
+        verify_error = "No password to verify."
 
-    if len(password) < 3 or len(password) > 20:
+    if (len(password) > 0 and len(password) <= 3) or len(password) > 20:
         password_error = "Password must be at least 3 characters but no more than 20 characters long."
 
     if " " in username:
@@ -44,8 +44,9 @@ def user_signup():
     if " " in password:
         password_error = "Password cannot contain spaces."
     
-    if verify == "" or verify != password:
-        verify_error = "Passwords do not match."
+    if password != "":
+        if verify == "" or verify != password:
+            verify_error = "Passwords do not match."
         
 
     if email != "":
